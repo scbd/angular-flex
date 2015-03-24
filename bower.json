@@ -2,12 +2,10 @@
   "name": "angular-flex",
   "version": "0.0.1",
   "main": "./angular-flex.js",
+  "ignore": [],
+  "dependencies": { },
   "homepage": "https://github.com/scbd/angular-flex",
-  "authors": [
-    "SCBD"
-  ],
+  "authors": [ "SCBD" ],
   "description": "Make AngularJS Module dynamic!",
-  "keywords": [
-    "AngularJS", "RequireJS"
-  ]
+  "keywords": [ "AngularJS", "RequireJS", "Lazy" ]
 }
