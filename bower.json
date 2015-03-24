@@ -1,0 +1,12 @@
+{
+  "name": "angular-flex",
+  "version": "0.0.1",
+  "homepage": "https://github.com/scbd/angular-flex",
+  "authors": [
+    "SCBD"
+  ],
+  "description": "Make AngularJS Module dynamic!",
+  "keywords": [
+    "AngularJS", "RequireJS"
+  ]
+}
