@@ -1,6 +1,6 @@
 {
   "name": "angular-flex",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "main": "./angular-flex.js",
   "ignore": [],
   "dependencies": { },
