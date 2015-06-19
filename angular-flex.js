@@ -32,13 +32,12 @@
 
                         // Allow dynamic registration
 
-                        module.filter     = warnDuplicate('filter',     $filterProvider.register);
-                        module.provider   = warnDuplicate('provider',   $provide.provider);
-                        module.factory    = warnDuplicate('factory',    $provide.factory);
-                        module.value      = warnDuplicate('value',      $provide.value);
-                        module.controller = warnDuplicate('controller', $controllerProvider.register);
-                        module.directive  = warnDuplicate('directive',  $compileProvider.directive);
-
+                        module.filter     = warnDuplicate('filter',     wrap($filterProvider.register, module));
+                        module.provider   = warnDuplicate('provider',   wrap($provide.provider, module));
+                        module.factory    = warnDuplicate('factory',    wrap($provide.factory, module));
+                        module.value      = warnDuplicate('value',      wrap($provide.value, module));
+                        module.controller = warnDuplicate('controller', wrap($controllerProvider.register, module));
+                        module.directive  = warnDuplicate('directive',  wrap($compileProvider.directive, module));
                     }
                 ]);
 
@@ -76,6 +75,19 @@
             ng.defineModule(modules[i]);
 	};
 
+    //============================================================
+    //
+    //
+    //============================================================
+    function wrap(handlerFn, module)
+    {
+        return function(name, a, b, c, d, e, f, g, h, i, j)
+        {
+            handlerFn(name, a, b, c, d, e, f, g, h, i, j);
+
+            return module;
+        };
+    }
 
     ////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
