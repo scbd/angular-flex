@@ -59,8 +59,6 @@
 		}
 		catch(e)
 		{
-            console.log("Predefine module", moduleName);
-
 			return ng.module(moduleName, []);
 		}
 	};
