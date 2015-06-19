@@ -32,12 +32,12 @@
 
                         // Allow dynamic registration
 
-                        module.filter     = warnDuplicate('filter',     wrap($filterProvider.register, module));
-                        module.provider   = warnDuplicate('provider',   wrap($provide.provider, module));
-                        module.factory    = warnDuplicate('factory',    wrap($provide.factory, module));
-                        module.value      = warnDuplicate('value',      wrap($provide.value, module));
-                        module.controller = warnDuplicate('controller', wrap($controllerProvider.register, module));
-                        module.directive  = warnDuplicate('directive',  wrap($compileProvider.directive, module));
+                        module.filter     = warnDuplicate('filter',     wrap($filterProvider, $filterProvider.register, module));
+                        module.provider   = warnDuplicate('provider',   wrap($provide, $provide.provider, module));
+                        module.factory    = warnDuplicate('factory',    wrap($provide, $provide.factory, module));
+                        module.value      = warnDuplicate('value',      wrap($provide, $provide.value, module));
+                        module.controller = warnDuplicate('controller', wrap($controllerProvider, $controllerProvider.register, module));
+                        module.directive  = warnDuplicate('directive',  wrap($compileProvider, $compileProvider.directive, module));
                     }
                 ]);
 
@@ -79,11 +79,11 @@
     //
     //
     //============================================================
-    function wrap(handlerFn, module)
+    function wrap(_this, handlerFn, module)
     {
-        return function(name, a, b, c, d, e, f, g, h, i, j)
+        return function()
         {
-            handlerFn(name, a, b, c, d, e, f, g, h, i, j);
+            handlerFn.apply(_this, Array.prototype.slice.call(arguments));
 
             return module;
         };
@@ -98,7 +98,7 @@
     {
         NoDuplicateStores[store] = {};
 
-        return function(name, a, b, c, d, e, f, g, h, i, j)
+        return function(name)
         {
             if(NoDuplicateStores[store][name]!==undefined) {
 
@@ -107,7 +107,7 @@
                 return NoDuplicateStores[store][name];
             }
 
-            NoDuplicateStores[store][name] = handlerFn(name, a, b, c, d, e, f, g, h, i, j) || null;
+            NoDuplicateStores[store][name] = handlerFn.apply(null, Array.prototype.slice.call(arguments));
 
             return NoDuplicateStores[store][name];
         };
