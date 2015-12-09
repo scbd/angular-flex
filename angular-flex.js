@@ -71,7 +71,9 @@
 
         for(var i=0; i<modules.length; ++i)
             ng.defineModule(modules[i]);
-	};
+            
+        return modules;
+    };
 
     //============================================================
     //
