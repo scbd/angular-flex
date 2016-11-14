@@ -2,7 +2,6 @@
 
     if(!ng)             throw 'angular not loaded/defined';
     if(ng.defineModule) return;
-    if(define)          define('angular-flex', ng);
 
     var ng_module = ng.module.bind(ng);
 
