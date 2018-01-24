@@ -1,6 +1,10 @@
 (function(ng) { 'use strict';
 
-    if(!ng)             throw 'angular not loaded/defined';
+    if(!ng) { try { ng = require('angular'); } catch(e) {} }
+    if(!ng)   throw 'angular not loaded/defined';
+
+    if(module) module.exports = ng;
+
     if(ng.defineModule) return;
 
     var ng_module = ng.module.bind(ng);
@@ -70,7 +74,7 @@
 
         for(var i=0; i<modules.length; ++i)
             ng.defineModule(modules[i]);
-            
+
         return modules;
     };
 
@@ -116,5 +120,6 @@
     ////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
 
+    return ng;
 
-})(window.angular);
+})(window && window.angular);

@@ -1,10 +1,10 @@
 {
-  "name": "angular-flex",
   "description": "Make AngularJS Module dynamic!",
-  "version": "1.0.1",
-  "repository" :
-  {
-      "type" : "git",
-      "url" : "https://github.com/scbd/angular-flex"
-  }
+  "homepage": "https://github.com/scbd/angular-flex#readme",
+  "name": "angular-flex",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scbd/angular-flex.git"
+  },
+  "version": "2.0.0"
 }
