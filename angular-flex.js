@@ -1,9 +1,10 @@
-(function(ng) { 'use strict';
+(function(ng) { //'use strict';
 
     if(!ng) { try { ng = require('angular'); } catch(e) {} }
     if(!ng)   throw 'angular not loaded/defined';
 
-    if(module) module.exports = ng;
+    if(define)  define([], function() { return ng; });
+    else module.exports = ng;
 
     if(ng.defineModule) return;
 
