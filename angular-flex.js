@@ -9,6 +9,8 @@
     if(ng.defineModule) return;
 
     var ng_module = ng.module.bind(ng);
+    var ng_bootstrap = ng.bootstrap.bind(ng);
+    var ng_$injector;
 
     //============================================================
     //
@@ -45,11 +47,43 @@
                     }
                 ]);
 
+                module.run = run_wrapper(module.run);
+
             })(module);
         }
 
         return module;
     };
+
+    //============================================================
+    //
+    //
+    //============================================================
+    ng.bootstrap = function(target, modules) {
+        
+        ng.module(modules[0]).run(['$injector', function($injector) { 
+            ng_$injector = $injector; 
+        }]);
+        
+        ng_bootstrap(target, modules);
+    }
+
+    //============================================================
+    //
+    //
+    //============================================================
+    function run_wrapper(runner) {
+        
+        return function(fn) {
+            
+            if(ng_$injector)  {
+                ng_$injector.invoke(fn);
+                return this; 
+            }
+            
+            return runner.call(this, fn);
+        }
+    }
 
     //============================================================
     //
