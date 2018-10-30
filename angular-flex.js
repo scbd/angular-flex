@@ -16,7 +16,7 @@
     //
     //
     //============================================================
-    ng.module = function(moduleName, deps) {
+    ng.module = function(moduleName, deps, initAngularHelpers) {
 
         if(deps===undefined)
             return ng_module(moduleName);
@@ -26,10 +26,12 @@
         try
         {
             module = ng_module(moduleName);
+            if(initAngularHelpers)
+                initAngularHelpers();
         }
         catch(e)
         {
-            module = ng_module(moduleName, deps);
+            module = ng_module(moduleName, deps, initAngularHelpers);
 
             (function(module) {
 
@@ -42,6 +44,9 @@
                         module.provider   = warnDuplicate('provider',   wrap($provide, $provide.provider, module));
                         module.factory    = warnDuplicate('factory',    wrap($provide, $provide.factory, module));
                         module.value      = warnDuplicate('value',      wrap($provide, $provide.value, module));
+                        module.service    = warnDuplicate('service',    wrap($provide, $provide.service, module));
+                        module.constant   = warnDuplicate('constant',   wrap($provide, $provide.constant, module));
+                        module.decorator  = warnDuplicate('decorator',  wrap($provide, $provide.decorator, module));
                         module.controller = warnDuplicate('controller', wrap($controllerProvider, $controllerProvider.register, module));
                         module.directive  = warnDuplicate('directive',  wrap($compileProvider, $compileProvider.directive, module));
                     }
