@@ -3,8 +3,11 @@
     if(!ng) { try { ng = require('angular'); } catch(e) {} }
     if(!ng)   throw 'angular not loaded/defined';
 
-    if(define)  define([], function() { return ng; });
-    else module.exports = ng;
+    try {
+        if(define)  define([], function() { return ng; });
+        else module.exports = ng;
+    }
+    catch(e) { /* lazy commonjs/amd */ }
 
     if(ng.defineModule) return;
 
